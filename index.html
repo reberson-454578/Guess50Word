@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guess50Word</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1><i data-lucide="search-check"></i> Guess50Word</h1>
+        <button id="toggleTheme" title="Alternar tema">
+          <i id="themeIcon" data-lucide="sun"></i>
+        </button>
+      </div>
+
+      <p>Descubra a palavra número <strong>50</strong> da lista!</p>
+
+      <input
+        type="text"
+        id="wordInput"
+        class="entrada-padrao"
+        placeholder="Digite uma palavra..."
+      />
+
+      <div id="feedback"></div>
+      <div id="extraActions"></div>
+      <ul id="guessList"></ul>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+      lucide.createIcons();
+    </script>
+  </body>
+</html>

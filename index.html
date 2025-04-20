@@ -9,21 +9,24 @@
     <link rel="icon" type="image/png" href="favicon.png" />
   </head>
   <body>
-    <div class="container">
-      <div class="header">
+    <div class="container fade-in fade-in-delay-1">
+      <div class="header fade-in fade-in-delay-2">
         <h1><i data-lucide="search-check"></i> Guess50Word</h1>
         <button id="toggleTheme" title="Alternar tema">
           <i id="themeIcon" data-lucide="sun"></i>
         </button>
       </div>
 
-      <p>Descubra a palavra número <strong>50</strong> da lista!</p>
+      <p class="fade-in fade-in-delay-3">
+        Descubra a palavra número <strong>50</strong> da lista!
+      </p>
 
       <input
         type="text"
         id="wordInput"
         class="entrada-padrao"
         placeholder="Digite uma palavra..."
+        class="entrada-padrao fade-in fade-in-delay-4"
       />
 
       <div id="feedback"></div>

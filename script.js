@@ -277,6 +277,10 @@ function checkWord() {
     }
 
     renderTentativas();
+    localStorage.setItem(
+      "guess50_tentativas_" + dataHoje,
+      JSON.stringify(tentativasRegistradas)
+    );
   }
 
   inputField.value = "";
@@ -317,6 +321,58 @@ document
 window.onload = function () {
   const input = document.getElementById("wordInput");
   input.focus();
+
+  const tentativasSalvas = localStorage.getItem(
+    "guess50_tentativas_" + dataHoje
+  );
+  if (tentativasSalvas) {
+    const tentativas = JSON.parse(tentativasSalvas);
+    tentativasRegistradas.push(...tentativas);
+    renderTentativas();
+
+    // Se a palavra certa já foi encontrada
+    const acertou = tentativas.some((t) => t.index === alvoIndex);
+    if (acertou) {
+      document.getElementById("wordInput").disabled = true;
+      mostrarFeedback(
+        "Acertou! A palavra 50 foi encontrada!",
+        "#2e7d32",
+        "check-circle",
+        true
+      );
+
+      // Adiciona o botão de mostrar a lista, se ainda não foi clicado
+      const extra = document.getElementById("extraActions");
+      if (!extra.innerHTML.includes("Mostrar as 100 palavras")) {
+        const botaoMostrar = document.createElement("button");
+        botaoMostrar.textContent = "Mostrar as 100 palavras";
+        botaoMostrar.style.marginTop = "15px";
+        botaoMostrar.style.padding = "10px 16px";
+        botaoMostrar.style.fontSize = "14px";
+        botaoMostrar.style.borderRadius = "8px";
+        botaoMostrar.style.border = "none";
+        botaoMostrar.style.cursor = "pointer";
+        botaoMostrar.style.backgroundColor = "#2e7d32";
+        botaoMostrar.style.color = "white";
+        botaoMostrar.style.transition = "background-color 0.3s ease";
+        botaoMostrar.onmouseover = () =>
+          (botaoMostrar.style.backgroundColor = "#1b5e20");
+        botaoMostrar.onmouseout = () =>
+          (botaoMostrar.style.backgroundColor = "#2e7d32");
+
+        botaoMostrar.onclick = function () {
+          mostrarTodasPalavrasRestantes();
+          botaoMostrar.disabled = true;
+          botaoMostrar.textContent = "Palavras exibidas";
+          botaoMostrar.style.opacity = "0.7";
+          botaoMostrar.style.cursor = "default";
+        };
+
+        extra.innerHTML = "";
+        extra.appendChild(botaoMostrar);
+      }
+    }
+  }
 
   if (jaJogouHoje) {
     input.disabled = true;
